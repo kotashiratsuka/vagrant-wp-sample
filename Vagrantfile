@@ -12,11 +12,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.host_name = "%s.vagrant" % "vbox"
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "INSANEWORKS-CentOS-6.4-x86_64-v20131130"
+  config.vm.box = "INSANEWORKS-CentOS-6.5-x86_64-v20131201"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "http://www.insaneworks.co.jp/pub/boxes/INSANEWORKS-CentOS-6.4-x86_64-v20131130.box"
+  config.vm.box_url = "http://www.insaneworks.co.jp/pub/boxes/INSANEWORKS-CentOS-6.5-x86_64-v20131201.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
