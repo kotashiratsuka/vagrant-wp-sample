@@ -12,11 +12,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.host_name = "%s.vagrant" % "vbox"
 
   # Every Vagrant virtual environment requires a box to build off of.
-  config.vm.box = "INSANEWORKS-CentOS-6.5-x86_64-v20131201"
+  config.vm.box = "INSANEWORKS-CentOS-6.5-x86_64-v20140101"
 
   # The url from where the 'config.vm.box' box will be fetched if it
   # doesn't already exist on the user's system.
-  config.vm.box_url = "http://www.insaneworks.co.jp/pub/boxes/INSANEWORKS-CentOS-6.5-x86_64-v20131201.box"
+  config.vm.box_url = "http://www.insaneworks.co.jp/pub/boxes/INSANEWORKS-CentOS-6.5-x86_64-v20140101.box"
 
   # Create a forwarded port mapping which allows access to a specific port
   # within the machine from a port on the host machine. In the example below,
@@ -46,13 +46,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # backing providers for Vagrant. These expose provider-specific options.
   # Example for VirtualBox:
   #
-  config.vm.provider :virtualbox do |vb|
+  #config.vm.provider :virtualbox do |vb|
   #   # Don't boot with headless mode
-    vb.gui = true
+  #  vb.gui = true
   #
   #   # Use VBoxManage to customize the VM. For example to change memory:
   #   vb.customize ["modifyvm", :id, "--memory", "1024"]
-  end
+  #end
   #
   # View the documentation for the provider you're using for more
   # information on available options.
@@ -84,6 +84,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   # path, and data_bags path (all relative to this Vagrantfile), and adding
   # some recipes and/or roles.
   #
+  config.vm.provision :shell, inline: "grep -q single-request-reopen /etc/resolv.conf || ( echo 'options single-request-reopen' >> /etc/resolv.conf; service network restart )"
   config.vm.provision :chef_solo do |chef|
     chef.cookbooks_path = "cookbooks","site-cookbooks"
     chef.add_recipe "php"
@@ -97,7 +98,6 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
       }
     }
   end
-  config.vm.provision :shell, inline: "grep -q single-request-reopen /etc/resolv.conf || ( echo 'options single-request-reopen' >> /etc/resolv.conf; service network restart )"
   #   chef.cookbooks_path = "../my-recipes/cookbooks"
   #   chef.roles_path = "../my-recipes/roles"
   #   chef.data_bags_path = "../my-recipes/data_bags"
